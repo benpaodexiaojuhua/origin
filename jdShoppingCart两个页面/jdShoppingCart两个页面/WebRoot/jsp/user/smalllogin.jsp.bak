@@ -1,0 +1,299 @@
+<%@ page language="java" import="java.util.*,com.vo.Product,com.page.*,com.service.impl.ProductServiceImpl" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+	<head>
+		<title>京东界面.html</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script src="../jquery-3.0.0/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+		</script>
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+		<style type="text/css">
+			.left-login {
+				height: 400px;
+				width: 348px;
+				background-color: #FFFFFF;
+				margin: 0 auto;
+				/*position: absolute;
+	left: 824;
+	top: 40px;*/
+				/*border :1px solid #080808;*/
+			}
+			
+			.login-box {
+				height: 306px;
+				width: 317px;
+				margin: 15px 1px 15px 11px;
+				padding: 10px;
+				/* border: 1px solid blue;*/
+			}
+			
+			.login-top {
+				width: 306px;
+				height: 27px;
+				overflow: visible;
+			}
+			
+			h3 {
+				position: relative;
+				height: 27px;
+				line-height: 27px;
+				top: -20px;
+				float: left;
+				color: #666;
+				font-size: 20px;
+			}
+			
+			.login-zhuce {
+				float: right;
+				width: 77px;
+				height: 19px;
+			}
+			/*指的那一行的div*/
+			
+			div.tishiyu {
+				position: relative;
+				background: #fff6d2;
+				color: #666;
+				border: 1px solid #ffe57d;
+				width: 306px;
+				height: 27px;
+				font-size: 12px;
+				line-height: 24px;
+			}
+			
+			b {
+				position: absolute;
+				top: 50%;
+				left: 10px;
+				display: block;
+				margin-top: -8px;
+				width: 16px;
+				height: 17px;
+				overflow: hidden;
+				background: url(img/images/pwd-icons-new.png) -104px -22px no-repeat;
+			}
+			
+			.div-logo {
+				float: left;
+				height: 80px;
+				width: 190px;
+			}
+			
+			.div-font {
+				float: left;
+				font-size: 32px;
+				line-height: 5px;
+			}
+			
+			.div11 {
+				height: 252px;
+				width: 306px;
+			}
+			
+			.div1 {
+				float: left;
+				font-size: 12px;
+				height: 30px;
+				width: 306px;
+				/*
+		margin: 2px;
+	padding: 2px;
+	*/
+				padding-top: 5px;
+				padding-bottom: 10px;
+			}
+			
+			.mainlable {
+				float: left;
+				width: 38px;
+				height: 38px;
+				border-right: 1px solid #bdbdbd;
+				background: url("img/images/pwd-icons-new.png") no-repeat;
+			}
+			
+			.namelable {
+				background-position: -2px 0px;
+			}
+			
+			.locklable {
+				background-position: -50px 0px;
+			}
+			
+			input {
+				width: 266px;
+				height: 38px;
+			}
+			
+			.horizontal-ul {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.horizontal-ul>li {
+				float: left;
+			}
+			
+			.line {
+				color: #ccc;
+				padding: 0px 12px;
+				/*background-color:green;*/
+			}
+			
+			div.safe {
+				width: 306px;
+				height: 18px;
+				position: absolute;
+				top: 190px;
+				color: #666;
+			}
+			
+			div.aut-login {
+				width: 80px;
+				height: 15px;
+				float: left;
+				line-height: 1px;
+			}
+			
+			div.forget-pw {
+				width: 60px;
+				height: 15px;
+				float: right;
+				font-size: 12px;
+			}
+			
+			div.btn-login {
+				width: 302;
+				height: 31px;
+				border: 1px solid #e85356;
+				background: #e85356;
+				position: absolute;
+				top: 222px;
+			}
+			
+			div.btn-login>.loginbutton {
+				display: block;
+				color: #fff;
+				text-align: center;
+				line-height: 31px;
+				text-decoration: none;
+			}
+			
+			.jdcheckbox {
+				width: 13px;
+				height: 13px;
+			}
+			
+			div.coagent {
+				width: 306px;
+				height: 44px;
+				position: absolute;
+				top: 266px;
+			}
+			
+			.coagent>.horizontal-ul>li {
+				font-size: 12px;
+				font-family: "宋体";
+			}
+			
+			h5 {
+				width: 306px;
+				height: 10px;
+				color: #999;
+				font: 12px/150% Arial, Verdana, "宋体";
+			}
+			
+			.loginlable {
+				width: 48px;
+				height: 15px;
+				font-size: 12px;
+			}
+			
+			.horizontal-ul li a {
+				color: #666;
+			}
+			
+			a:link {
+				text-decoration: none;
+			}
+			
+			a:hover {
+				text-decoration: underline;
+			}
+			
+			.horizontal-ul li span {
+				color: #666;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="left-login">
+			<div class="login-box">
+				<div class="login-top">
+					<h3>京东会员</h3>
+					<div class="login-zhuce">
+						<img src="img/images/zhuxe.png">
+					</div>
+				</div>
+				<div class="tishiyu">
+
+					<b></b> 公共场所不建议自动登录，以防账号丢失
+				</div>
+				<div class="div11">
+					<!-- <br /> -->
+					<div class="div1">
+						<label class="mainlable namelable"></label><input type="text" placeholder="邮箱/用户名/已验证手机"><br />
+					</div>
+					<br />
+
+					<div class="div1">
+						<label class="mainlable locklable"></label><input type="password" placeholder="密码">
+					</div>
+				</div>
+				<!-- 自动登录。。。 忘记密码？  -->
+				<div class="safe">
+					<div class="aut-login">
+						<span> <input class="jdcheckbox" type="checkbox"
+							name="automatic-login" value="yes" checked="checked" /> <lable
+								class="loginlable">自动登录</lable>
+						</span>
+					</div>
+					<div class="forget-pw">
+						<span><a href="#">忘记密码？</a></span>
+					</div>
+				</div>
+				<div class="btn-login">
+					<!-- 登录按钮 -->
+					<a href="http://baidu.com" class="loginbutton" target="_black">登 录
+					</a>
+				</div>
+
+				<div class="coagent">
+					<h5>使用合作网站账号登录京东：</h5>
+					<ul class="horizontal-ul">
+						<li>
+							<a href="#">京东钱包</a><span class="line">|</span></li>
+						<li>
+							<a href="#">QQ</a><span class="line">|</span></li>
+						<li>
+							<a href="#">微信</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+	</body>
+
+</html>

@@ -7,7 +7,7 @@
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
-<style type="text/css">
+	<style type="text/css">
 	* {
 	margin: 0px;
 }
@@ -1078,7 +1078,7 @@ left: 40px;
 }
 
 .p-name {
-	width:208px;
+	width:400px;
     height: 40px;
     line-height: 20px;
     overflow: hidden;
@@ -1102,8 +1102,8 @@ top: 10px;
 
 .p-extend {
 	position: absolute;
-left: 150px;
-top: 50px;
+    left: 150px;
+    top: 50px;
 }
 
 .p-extend i {
@@ -1745,7 +1745,215 @@ img {
 
 
 </style>
-
+	  <script src="token.js"></script>
+	  <script src="js/jquery-3.1.0.js"></script>
+	  <script src="js/vue.js"></script>
+	  <script>
+          $(function () {
+              let product = new Vue({
+                  el:"#productCart",
+                  data:{
+                      id:0,
+                      pros:[],
+                      checked:"false",
+					  skuId:0,
+                  },
+                  methods:{
+                      setName:(function () {
+                          this.pros.forEach(function (pro) {
+                              pro.skuImage = "http://123.57.7.108:81/".concat(pro.skuImage);
+                          })
+                      }),
+                      setSkuID:(function (index) {
+						  this.skuId = this.pros[index].skuId;
+                      }),
+                      numCut:(function (index) {
+                          if(this.pros[index].skuCount>1){
+                              this.pros[index].skuCount -= 1;
+                              this.changeNum(index);
+                          }
+                      }),
+                      numAdd:(function (index) {
+                          this.pros[index].skuCount += 1;
+                          this.changeNum(index);
+                      }),
+                      changeNum:(function (index) {
+                          let pro = { "cartId":this.id,"count": this.pros[index].skuCount,"skuId": this.pros[index].skuId};
+                          $.ajax({
+                              type:"PATCH",
+                              url:"http://www.xiaozai.tech:2048/emall/cart",
+                              data:JSON.stringify(pro),
+                              contentType:"application/json",
+                              beforeSend:function (request) {
+                                  request.setRequestHeader("Authorization",token);
+                              },
+                              success:function (result) {
+                                  console.log(result);
+                              }
+                          });
+                      }),
+                      checks:(function () {
+                          let cartItemIds = new Array();
+                          if(!this.checked){
+                              this.pros.forEach(function (pro) {
+                                  cartItemIds.push(pro.id);
+                              })
+                          }
+                          this.pros.forEach(function (pro) {
+                              pro.selected = event.target.checked;
+                          })
+                          this.changeSelected(cartItemIds);
+                      }),
+                      check:(function (index) {
+                          let cartItemIds = new Array();
+                          if(this.pros[index].selected){
+                              this.pros[index].selected = 0;
+                              this.checked = 0;
+                          }else{
+                              cartItemIds.push(this.pros[index].id);
+                              this.calcChecked(1);
+                          }
+                          this.pros.forEach(function (pro) {
+                              if(pro.selected == 1){
+                                  cartItemIds.push(pro.id)
+                              }
+                          })
+                          this.changeSelected(cartItemIds);
+                      }),
+                      changeSelected:(function (cartItemIds) {
+                          let pro = {"cartId": this.id,"cartItemIds":cartItemIds};
+                          $.ajax({
+                              type:"PATCH",
+                              url:"http://www.xiaozai.tech:2048/emall/cart/items",
+                              data:JSON.stringify(pro),
+                              contentType:"application/json",
+                              beforeSend:function (request) {
+                                  request.setRequestHeader("Authorization",token);
+                              },
+                              success:function (result) {
+                                  this.pros = result.data.items;
+                                  console.log(result);
+                              }
+                          });
+                      }),
+                      calcChecked:(function (num) {
+                          this.pros.forEach(function (pro) {
+                              if(pro.selected){
+                                  num += 1;
+                              }
+                          })
+                          this.checked = num == this.pros.length ? 1:0;
+                      }),
+                      del:(function (index) {
+                          let cartItemIds = new Array();
+                          cartItemIds.push(this.pros[index].id)
+                          this.pros.splice(index,1);
+                          this.calcChecked(0);
+                          this.delPro(cartItemIds);
+                      }),
+                      delSeleced:(function (index) {
+                          let cartItemIds = new Array();
+                          this.pros.forEach(function (pro) {
+                              if(pro.selected == 1){
+                                  cartItemIds.push(pro.id);
+                                  this.pros.splice(index,1);
+                              }
+                          })
+                          this.calcChecked(0);
+                          this.delPro(cartItemIds);
+                      }),
+                      delPro:(function (cartItemIds) {
+                          let pro = {"cartId": this.id,"cartItemIds":cartItemIds};
+                          $.ajax({
+                              type:"DELETE",
+                              url:"http://www.xiaozai.tech:2048/emall/cart/items",
+                              data:JSON.stringify(pro),
+                              contentType:"application/json",
+                              beforeSend:function (request) {
+                                  request.setRequestHeader("Authorization",token);
+                              },
+                              success:function (result) {
+                                  console.log(result);
+                              }
+                          });
+                      })
+				  },
+                  computed:{
+                      calcAll:(function () {
+                          let sum = 0;
+                          let len = this.pros.length;
+                          this.pros.forEach(function (pro) {
+                              if(pro.selected){
+                                  sum += pro.skuPrice*pro.skuCount;
+                              }
+                          })
+                          return sum;
+                      }),
+                      calcNum:(function () {
+                          let num = 0;
+                          let len = this.pros.length;
+                          this.pros.forEach(function (pro) {
+                              if(pro.selected){
+                                  num += 1;
+                              }
+                          })
+                          return num;
+                      })
+                  },
+				  mounted:function () {
+                      $.ajax({
+                          type:"get",
+                          url:"http://www.xiaozai.tech:2048/emall/cart/"+userId,
+                          beforeSend:function (request) {
+                              request.setRequestHeader("Authorization",token);
+                          },
+                          success:function (result) {
+                              product.id = result.data.id;
+                              product.pros = result.data.items;
+                              product.calcChecked(0);
+                              console.log(product.id);
+                              console.log(product.pros);
+                              product.setName();
+                          }
+                      });
+                      $.ajax({
+                          type:"get",
+                          url:"http://www.xiaozai.tech:2048/emall/customer/"+userId,
+                          beforeSend:function (request) {
+                              request.setRequestHeader("Authorization",token);
+                          },
+                          success:function (result) {
+                              customer.name = result.data.username;
+                          }
+                      });
+                      $.ajax({
+                          type:"get",
+                          url:"http://www.xiaozai.tech:2048/emall/customer/addrs/"+userId,
+                          beforeSend:function (request) {
+                              request.setRequestHeader("Authorization",token);
+                          },
+                          success:function (result) {
+                              customer.addrs = result.data;
+                              address.addrs = result.data;
+                          }
+                      });
+                  }
+              });
+              let customer = new Vue({
+                  el:"#shortcut",
+                  data:{
+                      name:"请登录",
+                      addrs:[]
+                  },
+              });
+              let address = new Vue({
+                  el:"#div2",
+                  data:{
+                      addrs:[]
+                  },
+              })
+          });
+	  </script>
   </head>
   
   <body>
@@ -1755,9 +1963,10 @@ img {
 			<div class="w">
 				<ul class="fl">
 					<li class="dorpdown" id="ttbar-mycity">
-						<div class="dt cw-icon area-text-wrap">
-							<i class="ci-right"><s>◇</s></i> 送至：<span class="area-text" title="北京">北京</span>
-						</div>
+                        <div class="dt cw-icon area-text-wrap">
+                            <i class="ci-right"><s>◇</s></i> 送至：
+                            <span class="area-text" title="北京">1</span>
+                        </div>
 
 						<div class="dd dorpdown-layer">
 							<div class="dd-spacer"></div>
@@ -1880,13 +2089,13 @@ img {
 				</ul>
 				<ul class="fr">
 					<li class="fore1 nologin" id="ttbar-login">
-						<a href="DZSC_Login.html" class="link-login style-red">jd_747e10435...，请登录</a>&nbsp;&nbsp;
+						<a href="DZSC_Login.html" class="link-login style-red">你好，{{name}}</a>&nbsp;&nbsp;
 						<a href="DZSC_Register.html" class="link-regist ">免费注册</a>
 					</li>
 					<li class="spacer"></li>
 					<li class="fore2">
 						<div class="dt">
-							<a target="_blank" href="">我的订单</a>
+							<a target="_blank" href="我的订单/我的订单/DZSC_MyOrder.html">我的订单</a>
 						</div>
 					</li>
 					<li class="spacer"></li>
@@ -1902,7 +2111,7 @@ img {
 									<a href=""><img src="img/images2/no-img_mid_.jpg" width="60" height="60"></a>
 								</div>
 								<div class="u-name u-login">
-									<a href="" class="link-login">你好，请登录</a>
+									<a href="" class="link-login">你好，{{name}}</a>
 								</div>
 								<div class="u-extra">
 									<a href="" target="_blank">优惠券<span id="num-ticket"></span></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -2252,8 +2461,6 @@ img {
 
 		</div>
 		<!--最顶上的一条结束-->
-    		<div>
-    		
     		<!-- 京东图标 -->
     		<div class="logo">
     			<div style="width: 270px;float: left;position: relative;"><a href="//www.jd.com/" class="link1"><img src="img/images2/jd.png" alt="京东商城"/></a>
@@ -2269,28 +2476,26 @@ img {
     		</div>
     		</div>
     		<div class="nologin-tip">
-						<span class="wicon"></span>
-								您还没有登录！登录后购物车的商品将保存到您账号中
-									<a class="btn-1 ml10" href="DZSC_Login.html" clstag="clickcart|keycount|xincart|cart_pageTopLogin">立即登录</a>
-				</div>
+			</div>
     		<!-- 标题处 -->
-    		<div class="div2">
+    		<div class="div2" id = "div2">
     			<a href="#" style="" class="toRed"><em class="div2-1 ">全部商品&nbsp;</em><span class="number switch">1</span></a>
     			<a href="#"><em class="div2-1"style="margin-left: 27px;">京东大药房</em></a>
-    			<div class="sendToHere">
-    				<div>北京朝阳区</div>
-    				<b class="div2-b"></b>
-    			</div>
-    			<div class="sendTo">配送至：</div>
+    			<div class="sendTo">配送至：
+                    <select>
+                        <option v-for="addr in addrs"><span class="text" data-res="" >{{addr.province+addr.city}}</span></option>
+                    </select>
+                </div>
     			
     		</div>
     		<div class="w-line">
 						<div style="width: 82px; left: 0px;" class="floater"></div>
 					</div>
     		<div class="div2-line"></div>
+            <div id="productCart">
     		<div class="div3">
     			<div class="cart-checkbox">
-					<input checked="checked" id="selectAll2"class="jdcheckbox"type="checkbox" style="position: relative;top:1px;">
+					<input v-on:click="checks" v-model="checked" id="selectAll2"class="jdcheckbox"type="checkbox" style="position: relative;top:1px;">
 					<label class="checked" for="" >全选</label>
 					<div class="t-goods">商品</div>
 					<div class="t-price">单价(元)</div>
@@ -2299,10 +2504,9 @@ img {
 					<div class="t-action">操作</div>
 				</div>
     		</div>
-    		
-    		
+
     		<!-- 京东商店-->
-    		<div class="goods">
+    		<div class="goods"  >
     			<!--京东自营那一条-->
     			<div class="shop">
 	    			<input checked="checked" name="checkShop" id="selectShop" class="jdcheckbox self-shop " type="checkbox">
@@ -2311,135 +2515,59 @@ img {
 	    				<span class="tips-icon"></span>
     				</div>		
     		</div>
-    		<!--单品-->
-    		<div class="buygoods buygoodsselected item-list">
+				<!--单品-->
+				<div class="buygoods buygoodsselected item-list" v-for="(pro,index) in pros">
 					<!--图片及名称-->
-	    		<div class="p-checkbox cell">
-	    			<input checked="checked"id="selectGoods" class="jdcheckbox"type="checkbox"/>
+					<div class="p-checkbox cell">
+						<input id="selectGoods" class="jdcheckbox"type="checkbox" v-model="pro.selected"  v-on:click="check(index)"/>
 					</div>
-						<!-- 手机图片 -->
-						<div class="p-img">
-							<a target="_blank" ><img alt="小米 Note 全网通 黑色 移动联通电信4G手机 双卡双待"src="img/images2/phone1.jpg" /></a>
-						</div>
-						<div class="p-name">
-							<a  href="//item.jd.com/1601978.html" target="_blank">小米 Note 全网通 黑色 移动联通电信4G手机 双卡双待</a>
-						</div>
-						<div class="p-extend">
-							<span class="promise"><i></i><a>购买礼品包装</a></span><br/>
-							<span class="promise" ><i style="background-position: 0 -23px;"></i><a class="jd-service" href="#none">购买增值保障</a></span>
-						</div>
-							<div class="p-div2">
-								<div class="props-txt" title="黑">颜色：黑</div>
-								<div class="props-txt" title="标准(16GB)">尺码：标准(16GB)</div>
-							</div>
-							<div class="cell p-price p-div3" ><strong>1499.00</strong></div>
-							<div class="quantity-form">
-									<a class="decrement">-</a>
-									<input value="1" type="text" autocomplete="off" class="p-quantity-itxt" />
-									<a class="increment">+</a>
-							</div>
-				
-							<div class="cell p-sum div4"><strong>1499.00</strong></div>	
-							<div class="cell p-ops div5">
-								<!--单品-->
-								<a>删除</a>
-								<a class="a1">移到我的关注</a>
-							</div>
-    </div>
+					<!-- 手机图片 -->
+					<div class="p-img">
+						<a target="_blank"  :href="'DZSC_Product.html?skuId='+skuId" v-on:click="setSkuID(index)"><img :alt="pro.skuName":src="pro.skuImage"  /></a>
+					</div>
+					<div class="p-name">
+						<a :href="'DZSC_Product.html?skuId='+skuId" v-on:click="setSkuID(index)" target="_blank">{{pro.skuName}}</a>
+					</div>
+					<div class="p-extend">
+						<span class="promise"><i></i><a>购买礼品包装</a></span><br/>
+						<span class="promise" ><i style="background-position: 0 -23px;"></i><a class="jd-service" href="#none">购买增值保障</a></span>
+					</div>
+					<div class="cell p-price p-div3" ><strong>{{pro.skuPrice}}</strong></div>
+					<div class="quantity-form">
+                        <a class="decrement" v-on:click="numCut(index)">-</a>
+                        <input v-model="pro.skuCount" type="text" autocomplete="off" class="p-quantity-itxt" />
+                        <a class="increment" v-on:click="numAdd(index)">+</a>
 
-    		<!--单品-->
-    		<div class="buygoods buygoodsselected item-list">
-					<!--图片及名称-->
-	    		<div class="p-checkbox cell">
-	    			<input checked="checked"id="selectGoods" class="jdcheckbox"type="checkbox"/>
 					</div>
-						<!-- 手机图片 -->
-						<div class="p-img">
-							<a target="_blank" ><img alt="小米 Note 全网通 黑色 移动联通电信4G手机 双卡双待"src="img/images2/phone1.jpg" /></a>
-						</div>
-						<div class="p-name">
-							<a  href="//item.jd.com/1601978.html" target="_blank">小米 Note 全网通 黑色 移动联通电信4G手机 双卡双待</a>
-						</div>
-						<div class="p-extend">
-							<span class="promise"><i></i><a>购买礼品包装</a></span><br/>
-							<span class="promise" ><i style="background-position: 0 -23px;"></i><a class="jd-service" href="#none">购买增值保障</a></span>
-						</div>
-							<div class="p-div2">
-								<div class="props-txt" title="黑">颜色：黑</div>
-								<div class="props-txt" title="标准(16GB)">尺码：标准(16GB)</div>
-							</div>
-							<div class="cell p-price p-div3" ><strong>1499.00</strong></div>
-							<div class="quantity-form">
-									<a class="decrement">-</a>
-									<input value="1" type="text" autocomplete="off" class="p-quantity-itxt" />
-									<a class="increment">+</a>
-							</div>
-				
-							<div class="cell p-sum div4"><strong>1499.00</strong></div>	
-							<div class="cell p-ops div5">
-								<!--单品-->
-								<a>删除</a>
-								<a class="a1">移到我的关注</a>
-							</div>
-    </div>
-  
-  			<!--单品-->
-    		<div class="buygoods buygoodsselected item-list">
-					<!--图片及名称-->
-	    		<div class="p-checkbox cell">
-	    			<input checked="checked"id="selectGoods" class="jdcheckbox"type="checkbox"/>
+
+					<div class="cell p-sum div4"><strong>{{pro.skuPrice*pro.skuCount}}</strong></div>
+					<div class="cell p-ops div5">
+						<!--单品-->
+						<a v-on:click="del(index)">删除</a>
+						<a class="a1">移到我的关注</a>
 					</div>
-						<!-- 手机图片 -->
-						<div class="p-img">
-							<a target="_blank" ><img alt="小米 Note 全网通 黑色 移动联通电信4G手机 双卡双待"src="img/images2/phone1.jpg" /></a>
-						</div>
-						<div class="p-name">
-							<a  href="//item.jd.com/1601978.html" target="_blank">小米 Note 全网通 黑色 移动联通电信4G手机 双卡双待</a>
-						</div>
-						<div class="p-extend">
-							<span class="promise"><i></i><a>购买礼品包装</a></span><br/>
-							<span class="promise" ><i style="background-position: 0 -23px;"></i><a class="jd-service" href="#none">购买增值保障</a></span>
-						</div>
-							<div class="p-div2">
-								<div class="props-txt" title="黑">颜色：黑</div>
-								<div class="props-txt" title="标准(16GB)">尺码：标准(16GB)</div>
-							</div>
-							<div class="cell p-price p-div3"><strong>1499.00</strong></div>
-							<div class="quantity-form">
-									<a class="decrement">-</a>
-									<input value="1" type="text" autocomplete="off" class="p-quantity-itxt" />
-									<a class="increment">+</a>
-							</div>
-				
-							<div class="cell p-sum div4" ><strong>1499.00</strong></div>	
-							<div class="cell p-ops div5">
-								<!--单品-->
-								<a>删除</a>
-								<a class="a1">移到我的关注</a>
-							</div>
-    </div>
-    	</div>
-			
+				</div>
+			</div>
 			<!-- 结算 -->
 			<div class="check" id="selectall_div">
 			<div class="selectall">
 				<div style="float: left;"class="cart-checkbox">
-					<input id="selectAll1" checked="checked"  class="jdcheckbox selectall-box" type="checkbox">
+					<input id="selectAll1" v-on:click="checks" v-model="checked" class="jdcheckbox selectall-box" type="checkbox">
 					<label class="checked" for="">全选</label>
 				</div>
 				<div class="operation">
-					<a href="#none"  class="remove-batch">删除选中的商品</a>
+					<a href="#none"  class="remove-batch" v-on:click="delSeleced">删除选中的商品</a>
 					<a href="#none" class="follow-batch" >移到我的关注</a>
 				</div>
 				</div>
 			</div>  
 			<div class="toolbar-right">
 				<div class="amount-sum">
-					已选择<em>1</em>件商品<b class="up"></b>
+					已选择<em>{{calcNum}}</em>件商品<b class="up"></b>
 				</div>
 				<div class="toolbar-right-money">
 					<span class="txt">总价（不含运费）：</span>
-					<span class="price sumPrice"><em>￥1499.00</em></span><br/>
+					<span class="price sumPrice"><em>￥{{calcAll}}</em></span><br/>
 
 					<span class="txt toolbar-right-money-span ">已节省：</span>
 					<span class="price totalRePrice toolbar-right-money-span">-￥0.00</span>
@@ -2449,7 +2577,7 @@ img {
 					去结算<b></b></a>
 				</div>
 			</div>
-			
+			</div>
 			<!-- 猜你喜欢 -->
 			<div class="w">
 				<div class="m m1" id="c-tabs-new">
@@ -2706,57 +2834,5 @@ img {
 							});
 				});
 			</script>
-			
-			<script type="text/javascript">
-				$(function(){
-					$(".jdcheckbox").click(function(){
-						 if($(this).prop("checked")==true){
-						 		$(this).parents(".item-list").addClass("buygoodsselected");
-						 		var checked = $(".buygoods").find("jdcheckbox");
-						 		if(checked.prop("checked") == false){
-						 			$("#selectAll2").prop("checked",false);
-						 			$("#selectAll1").prop("checked",false);
-						 		}
-						 }else{
-						 	$(this).parents(".item-list").removeClass("buygoodsselected");
-						 	if($("#selectAll2").prop("checked") == true){
-						 		$("#selectAll2").prop("checked",false);
-						 	}
-						 	if($("#selectAll1").prop("checked") == true){
-						 		$("#selectAll1").prop("checked",false);
-						 	}
-						 }
-					});
-					
-					$("#selectAll2").click(function(){
-						if($(this).prop("checked") == true){
-							$(this).parents(".div3").next(".goods").find(".jdcheckbox").prop("checked",true);
-							$(this).parents(".div3").next(".goods").find(".item-list").addClass("buygoodsselected");
-							$("#selectAll1").prop("checked",true);
-						}else{
-							$(this).parents(".div3").next(".goods").find(".jdcheckbox").prop("checked",false);
-							$(this).parents(".div3").next(".goods").find(".item-list").removeClass("buygoodsselected");
-							$("#selectAll1").prop("checked",false);
-						}
-					});
-					
-					$("#selectAll1").click(function(){
-						if($(this).prop("checked") == true){
-							$(this).parents("#selectall_div").prev(".goods").find(".jdcheckbox").prop("checked",true);
-							$(this).parents("#selectall_div").prev(".goods").find(".item-list").addClass("buygoodsselected");
-							$("#selectAll2").prop("checked",true);
-						}else{
-							$(this).parents("#selectall_div").prev(".goods").find(".jdcheckbox").prop("checked",false);
-							$(this).parents("#selectall_div").prev(".goods").find(".item-list").removeClass("buygoodsselected");
-							$("#selectAll2").prop("checked",false);
-						}
-					});
-				})
-				
-			/*$(function(){
-				$(".div4").each(function(){
-					alert($(".div4").text());
-				});
-			});*/
-			</script>
+
 </html>

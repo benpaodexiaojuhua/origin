@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="默认的">
+    <list default="true" id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="版本1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Register.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.js" beforeDir="false" afterPath="$PROJECT_DIR$/token.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,41 +40,40 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\RootIdea\JD\js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\GitRepository" />
+      <recent name="D:\RootIdea\JD" />
+      <recent name="D:\RootIdea\JD\我的订单" />
       <recent name="D:\RootIdea\JD\我的订单\我的订单" />
       <recent name="D:\RootIdea\JD\我的订单\我的订单\js" />
       <recent name="D:\RootIdea\JD\js" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="" />
@@ -106,8 +105,18 @@
       <workItem from="1598944701120" duration="94000" />
       <workItem from="1598944831030" duration="677000" />
       <workItem from="1598960943851" duration="462000" />
-      <workItem from="1598965421980" duration="2169000" />
-      <workItem from="1599035271825" duration="1389000" />
+      <workItem from="1598965421980" duration="3253000" />
+      <workItem from="1599007278650" duration="1222000" />
+      <workItem from="1599011421062" duration="1288000" />
+      <workItem from="1599015739775" duration="15000" />
+      <workItem from="1599015888060" duration="28000" />
+      <workItem from="1599016136969" duration="1000000" />
+      <workItem from="1599032554699" duration="534000" />
+      <workItem from="1599033280959" duration="667000" />
+      <workItem from="1599035967393" duration="52000" />
+      <workItem from="1599037244973" duration="13000" />
+      <workItem from="1599038513704" duration="15000" />
+      <workItem from="1599044223301" duration="402000" />
     </task>
     <task id="LOCAL-00001" summary="版本1">
       <created>1598967424196</created>
@@ -116,39 +125,78 @@
       <option name="project" value="LOCAL" />
       <updated>1598967424196</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="版本1">
+      <created>1598967964184</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1598967964184</updated>
+    </task>
+    <task id="LOCAL-00003" summary="版本2">
+      <created>1599016436685</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599016436685</updated>
+    </task>
+    <task id="LOCAL-00004" summary="版本2">
+      <created>1599016623052</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1599016623052</updated>
+    </task>
+    <task id="LOCAL-00005" summary="版本1">
+      <created>1599044285878</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1599044285878</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="版本2" />
     <MESSAGE value="版本1" />
     <option name="LAST_COMMIT_MESSAGE" value="版本1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1252" y="134" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1598967678116">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1252" y="134" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598967678116" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598837016582">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598837016582" />
-    <state x="734" y="0" key="CommitChangelistDialog2" timestamp="1599017229090">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="734" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1599017229090" />
-    <state x="1041" y="7" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1598967418203" />
-    <state x="1220" y="262" key="FileChooserDialogImpl" timestamp="1598967009475">
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2" timestamp="1599044456877">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1220" y="262" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598967009475" />
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599044456877" />
+    <state x="1220" y="262" key="FileChooserDialogImpl" timestamp="1599032905366">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1220" y="262" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1599032905366" />
+    <state x="783" y="275" key="MultipleFileMergeDialog" timestamp="1599044403478">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="783" y="275" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599044403478" />
+    <state x="1193" y="142" key="RollbackChangesDialog" timestamp="1598967645686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1193" y="142" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598967645686" />
     <state x="982" y="136" key="SettingsEditor" timestamp="1598966939791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="982" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598966939791" />
-    <state x="514" y="213" key="Vcs.Push.Dialog.v2" timestamp="1599017178058">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="1032" y="238" key="Vcs.Push.Dialog.v2" timestamp="1599044463747">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="514" y="213" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1599017178058" />
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1598967525914" />
+    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599044463747" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1598690359950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

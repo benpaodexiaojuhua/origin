@@ -1836,7 +1836,86 @@ img {
 	}
 	
 		</style>
-
+        <script src="token.js"></script>
+        <script src="js/jquery-3.1.0.js"></script>
+        <script src="js/vue.js"></script>
+        <script>
+            $(function () {
+                let skuId = location.href.substring(location.href.indexOf('=')+1);
+                let product = new Vue({
+                    el:"#w",
+                    data:{
+                        id:0,
+                        len:0,
+                    },
+                    mounted:function () {
+                        $.ajax({
+                            type:"get",
+                            url:"http://www.xiaozai.tech:2048/emall/cart/"+userId,
+                            beforeSend:function (request) {
+                                request.setRequestHeader("Authorization",token);
+                            },
+                            success:function (result) {
+                                product.id = result.data.id;
+                                product.len = result.data.items.length;
+                                result.data.items.forEach(function (item) {
+                                    if(item.skuId == skuId){
+                                        p.pro = item;
+                                    }
+                                })
+                            }
+                        });
+                        $.ajax({
+                            type:"get",
+                            url:"http://www.xiaozai.tech:1024/emall/products/sku/"+skuId,
+                            beforeSend:function (request) {
+                                request.setRequestHeader("Authorization",token);
+                            },
+                            success:function (result) {
+                                 p.code = result.data.code;
+                                console.log(result.data)
+                            }
+                        });
+                        $.ajax({
+                            type:"get",
+                            url:"http://www.xiaozai.tech:2048/emall/customer/"+userId,
+                            beforeSend:function (request) {
+                                request.setRequestHeader("Authorization",token);
+                            },
+                            success:function (result) {
+                                customer.name = result.data.username;
+                                console.log(result.data);
+                            }
+                        });
+                        $.ajax({
+                            type:"get",
+                            url:"http://www.xiaozai.tech:2048/emall/customer/addrs/"+userId,
+                            beforeSend:function (request) {
+                                request.setRequestHeader("Authorization",token);
+                            },
+                            success:function (result) {
+                                customer.addrs = result.data;
+                                console.log(customer.addrs)
+                            }
+                        });
+                    }
+                })
+                let p = new Vue({
+                    el:"#divmiddle",
+                    data:{
+                        pro:[],
+                        code:"",
+                    },
+                })
+                let customer = new Vue({
+                    el:"#shortcut",
+                    data:{
+                        name:"请登录",
+						addrs:[]
+                    },
+                })
+            })
+        </script>
 	</head>
 
 	<body>
@@ -1856,13 +1935,13 @@ img {
 								<div class="area-content">
 									<div class="area-content-list">
 										<div class="item">
-											<a href="#" class="selected">北京</a>
+											<a href="" class="selected">北京</a>
 										</div>
 										<div class="item">
-											<a href="#">上海</a>
+											<a href="">上海</a>
 										</div>
 										<div class="item">
-											<a href="#">天津</a>
+											<a href="">天津</a>
 										</div>
 										<div class="item">
 											<a href="">重庆</a>
@@ -1971,13 +2050,13 @@ img {
 				</ul>
 				<ul class="fr">
 					<li class="fore1" id="ttbar-login">
-						<a href="" class="link-login">你好，请登录</a>&nbsp;&nbsp;
+						<a href="DZSC_Login.html" class="link-login">你好，{{name}}</a>&nbsp;&nbsp;
 						<a href="DZSC_Register.html" class="link-regist style-red">免费注册</a>
 					</li>
 					<li class="spacer"></li>
 					<li class="fore2">
 						<div class="dt">
-							<a target="_blank" href="">我的订单</a>
+							<a target="_blank" href="我的订单/我的订单/DZSC_MyOrder.html">我的订单</a>
 						</div>
 					</li>
 					<li class="spacer"></li>
@@ -1990,10 +2069,10 @@ img {
 							<div class="dd-spacer"></div>
 							<div class="userinfo">
 								<div class="u-pic">
-									<a href=""><img src="img/images2/no-img_mid_.jpg" width="60" height="60"></a>
+									<a href=""><img src="img/top/no-img_mid_.jpg" width="60" height="60"></a>
 								</div>
 								<div class="u-name u-login">
-									<a href="" class="link-login">你好，请登录</a>
+									<a href="" class="link-login">你好，{{name}}</a>
 								</div>
 								<div class="u-extra">
 									<a href="" target="_blank">优惠券<span id="num-ticket"></span></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -2084,7 +2163,7 @@ img {
 						<div class="dd dorpdown-layer">
 							<div class="dd-spacer"></div>
 							<div class="dd-inner" id="ttbar-atte-main">
-								<img src="img/images2/guanzhujderweima.jpg" alt="关注京东">
+								<img src="img/top/54c84f72Ncc1a02a2.jpg" alt="关注京东">
 							</div>
 						</div>
 					</li>
@@ -2343,9 +2422,8 @@ img {
 
 		</div>
 		<!--最顶上的一条结束-->
-
 		<!--搜索框部分 开始-->
-		<div class="w">
+		<div class="w" id="w">
 			<div id="logo">
 				<a href="" class="logo">京东</a>
 			</div>
@@ -2359,7 +2437,7 @@ img {
 			<div id="settleup" class="dorpdown">
 				<div class="cw-icon">
 					<i class="ci-left"></i>
-					<i class="ci-right">&gt;</i><i class="ci-count" id="shopping-amount">1</i>
+					<i class="ci-right">&gt;</i><i class="ci-count" id="shopping-amount">{{len}}</i>
 					<a target="_blank" href="DZSC_ShoppingCart.html">我的购物车</a>
 				</div>
 				<div class="dorpdown-layer">
@@ -4754,18 +4832,18 @@ img {
 		</div>
 		<div class="p-item">
 			<div class="p-img">
-				<a href="//item.jd.com/1514838.html" target="_blank">
-					<img src="img/images2/show11.jpg">
+				<a :href="'//item.jd.com/'+code+'.html'" target="_blank">
+					<img :src="'http://123.57.7.108:81/'+pro.skuImage">
 				</a>
 			</div>
 			<div class="p-info">
 				<div class="p-name">
-					<a href="//item.jd.com/1514838.html" target="_blank" 
-						title="小米 Note 全网通 粉色 移动联通电信4G手机 双卡双待">小米 Note 全网通 粉色 移动联通电信4G手机 双卡双待
+					<a :href="'//item.jd.com/'+code+'.html'" target="_blank"
+						:title="pro.skuName">{{pro.skuName}}
 					</a>
 				</div>
 				<div class="p-extra">
-					<span class="txt" title="粉">颜色：粉</span><span class="txt" title="全网通">尺码：全网通</span><span class="txt">/  数量：1</span>
+					<span class="txt">  数量：{{pro.skuCount}}</span>
 				</div></div>
 			<div class="clr"></div>
 			<div id="p-info-success">
@@ -5395,8 +5473,6 @@ img {
 						</div>
 					</div>
 					<div class="all-bottom"></div>
-					
-	
 	
 	
 		<script src="js/jquery-2.1.4.js"></script>

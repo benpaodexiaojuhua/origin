@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="版本1">
+    <list default="true" id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_AddOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_AddOrder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_AddShoppingCart.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_AddShoppingCart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_ListFir.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_ListFir.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DZSC_Register.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_Product.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_Settlement.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Settlement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DZSC_ShoppingCart.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_ShoppingCart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token.js" beforeDir="false" afterPath="$PROJECT_DIR$/token.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/我的订单/我的订单/DZSC_MyOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/我的订单/我的订单/DZSC_MyOrder.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,25 +47,35 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\RootIdea\JD\js" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\JAVA\ideaProject\origin" />
       <recent name="D:\RootIdea\JD" />
       <recent name="D:\RootIdea\JD\我的订单" />
       <recent name="D:\RootIdea\JD\我的订单\我的订单" />
       <recent name="D:\RootIdea\JD\我的订单\我的订单\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\RootIdea\JD\js" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="" />
@@ -102,6 +119,7 @@
       <workItem from="1599037244973" duration="13000" />
       <workItem from="1599038513704" duration="15000" />
       <workItem from="1599044223301" duration="402000" />
+      <workItem from="1599047826588" duration="6598000" />
     </task>
     <task id="LOCAL-00001" summary="版本1">
       <created>1598967424196</created>
@@ -138,16 +156,24 @@
       <option name="project" value="LOCAL" />
       <updated>1599044285878</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="版本5">
+      <created>1599047977366</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1599047977366</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="版本2" />
     <MESSAGE value="版本1" />
-    <option name="LAST_COMMIT_MESSAGE" value="版本1" />
+    <MESSAGE value="版本5" />
+    <option name="LAST_COMMIT_MESSAGE" value="版本5" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1252" y="134" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1598967678116">
@@ -158,10 +184,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598837016582" />
-    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2" timestamp="1599044456877">
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2" timestamp="1599047973378">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599044456877" />
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599047973378" />
     <state x="1220" y="262" key="FileChooserDialogImpl" timestamp="1599032905366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -178,10 +204,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="982" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598966939791" />
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2" timestamp="1599044463747">
+    <state x="524" y="186" key="Vcs.Push.Dialog.v2" timestamp="1599048062644">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599044463747" />
+    <state x="524" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599048062644" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1598690359950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1692,6 +1692,9 @@
 	<script src="js/jd.js"></script>
 	<script src="js/vue.js"></script>
 	<script>
+		let userId = localStorage.getItem("userId");
+		let userName = localStorage.getItem("userName");
+		let token = localStorage.getItem("token");
 		$(function () {
 			var ul = decodeURI(location.href);
 			var Key=ul.substring(ul.indexOf("=")+1,ul.length);

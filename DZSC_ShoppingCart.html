@@ -1750,6 +1750,9 @@ img {
 	  <script src="js/vue.js"></script>
 	  <script>
           $(function () {
+			  let userId = localStorage.getItem("userId");
+			  let userName = localStorage.getItem("userName");
+			  let token = localStorage.getItem("token");
               let product = new Vue({
                   el:"#productCart",
                   data:{

@@ -11,7 +11,16 @@
       <change afterPath="$PROJECT_DIR$/../javase/allisobject/allisobject.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../javase/javase.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../qq/qqServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../后端/后端.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/$PROJECT_FILE$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/artifacts/_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/qaplug_profiles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../提交/提交.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +58,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/我的订单" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\RootIdea\JD\我的订单" />
       <recent name="D:\RootIdea\JD\我的订单\我的订单" />
       <recent name="D:\RootIdea\JD\我的订单\我的订单\js" />
       <recent name="D:\RootIdea\JD\js" />
@@ -109,6 +119,7 @@
       <workItem from="1599011421062" duration="1288000" />
       <workItem from="1599015739775" duration="15000" />
       <workItem from="1599015888060" duration="28000" />
+      <workItem from="1599016136969" duration="309000" />
     </task>
     <task id="LOCAL-00001" summary="版本1">
       <created>1598967424196</created>
@@ -124,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598967964184</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="版本2">
+      <created>1599016436685</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599016436685</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,7 +150,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="版本1" />
-    <option name="LAST_COMMIT_MESSAGE" value="版本1" />
+    <MESSAGE value="版本2" />
+    <option name="LAST_COMMIT_MESSAGE" value="版本2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1252" y="134" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1598967678116">
@@ -143,10 +162,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598837016582" />
-    <state x="1041" y="7" key="CommitChangelistDialog2" timestamp="1598968114028">
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2" timestamp="1599016435497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1041" y="7" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1598968114028" />
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599016435497" />
     <state x="1220" y="262" key="FileChooserDialogImpl" timestamp="1598967689428">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -159,10 +178,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="982" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598966939791" />
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2" timestamp="1599014471358">
+    <state x="1032" y="238" key="Vcs.Push.Dialog.v2" timestamp="1599016490851">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599014471358" />
+    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599016490851" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1598690359950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

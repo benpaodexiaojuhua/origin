@@ -2,33 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e020a99-8585-48ad-bb2a-1ca544f1dba3" name="默认的" comment="版本1">
-      <change afterPath="$PROJECT_DIR$/../JavaWeb/JQuery/JQuery.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaWeb/JavaWeb.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaWeb/practice/practice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaWeb/sgg practice/sgg practice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../The_Back_End/The_Back_End.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../algorithm/algorithm.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../javase/allisobject/allisobject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../javase/javase.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../qq/qqServer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../后端/后端.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/$PROJECT_FILE$" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/artifacts/_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/qaplug_profiles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../提交/提交.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DZSC_AddOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_AddOrder.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DZSC_Register.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DZSC_Settlement.html" beforeDir="false" afterPath="$PROJECT_DIR$/DZSC_Settlement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/我的订单/我的订单/DZSC_MyOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/我的订单/我的订单/DZSC_MyOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/我的订单/我的订单/js/jquery-3.1.0.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery-3.1.0.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,13 +59,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,6 +116,7 @@
       <workItem from="1599035967393" duration="52000" />
       <workItem from="1599037244973" duration="13000" />
       <workItem from="1599038513704" duration="15000" />
+      <workItem from="1599044223301" duration="402000" />
     </task>
     <task id="LOCAL-00001" summary="版本1">
       <created>1598967424196</created>
@@ -166,16 +146,23 @@
       <option name="project" value="LOCAL" />
       <updated>1599016623052</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="版本1">
+      <created>1599044285878</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1599044285878</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="版本1" />
     <MESSAGE value="版本2" />
-    <option name="LAST_COMMIT_MESSAGE" value="版本2" />
+    <MESSAGE value="版本1" />
+    <option name="LAST_COMMIT_MESSAGE" value="版本1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1252" y="134" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1598967678116">
@@ -186,14 +173,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598837016582" />
-    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2" timestamp="1599016621847">
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2" timestamp="1599044456877">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599016621847" />
+    <state x="442" y="7" width="1234" height="1033" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599044456877" />
     <state x="1220" y="262" key="FileChooserDialogImpl" timestamp="1599032905366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1220" y="262" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1599032905366" />
+    <state x="783" y="275" key="MultipleFileMergeDialog" timestamp="1599044403478">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="783" y="275" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599044403478" />
     <state x="1193" y="142" key="RollbackChangesDialog" timestamp="1598967645686">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -202,10 +193,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="982" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598966939791" />
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2" timestamp="1599016632201">
+    <state x="1032" y="238" key="Vcs.Push.Dialog.v2" timestamp="1599044463747">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599016632200" />
+    <state x="1032" y="238" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599044463747" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1598690359950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

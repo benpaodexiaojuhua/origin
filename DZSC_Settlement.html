@@ -2555,6 +2555,9 @@
 <script src="js/vue.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
+        let userId = localStorage.getItem("userId");
+        let userName = localStorage.getItem("userName");
+        let token = localStorage.getItem("token");
         //alert($(".area-text").text());
         Cookie_name = "span_name";//定义一个cookie
         if ($.cookie(Cookie_name)) {//如果该cookie已经存在
@@ -2630,6 +2633,7 @@
             }
         })
         //获得收件人信息
+
         $.ajax({
             url: "http://www.xiaozai.tech:2048/emall/cart/"+userId,
             type: "get",

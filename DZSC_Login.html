@@ -551,7 +551,7 @@
 	</div>
 </div>
 <script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
-<!--<script type="text/javascript" src="token.js"></script>-->
+<script type="text/javascript" src="token.js"></script>
 <script type="text/javascript">
 	var errors = [
 		"请输入账户名和密码",
@@ -627,7 +627,6 @@
 			return alert("请您输入密码！");
 		}
 		//发送ajax
-		var token="";
 		if(flag ===true){
 			$.ajax({
 				url:"http://www.xiaozai.tech:2048/emall/login",
@@ -643,31 +642,19 @@
 				}),
 				success:function (data) {
 					if (data.code =='200'){
-						//console.log(data);
-						 token = data.data.tokenHead+" "+data.data.token;
+						//alert("aaa")
+						 token =data.data.token;
 						 //alert(token);
 						 userId = data.data.user.id;
 						 //alert(userId)
 						 userName = data.data.user.username;
 						 //alert(userName)
-						localStorage.setItem("token",token);
-						localStorage.setItem("userId",userId);
-						localStorage.setItem("userName",userName);
 						window.location.href = "DZSC_Index.html";
 					} else{
 						alert("登录失败。404：该用户还未注册或用户名密码输入错误！")
 					}
 				}
 			});
-
-
-
-
-
-			// var gettoken = "Bearer "+token;
-			// console.log(gettoken)
-			// // alert(gettoken);
-			// localStorage.setItem("token",gettoken);
 
 		}
 

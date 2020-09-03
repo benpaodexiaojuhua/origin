@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8" />
 		<title>京东(JD.COM)-综合网购首选-正品低价、品质保障、配送及时、轻松购物！</title>
-				
 		<style type="text/css">
 		
 					
@@ -776,7 +774,7 @@
 				border-left: 1px solid #b61d1d;
 				position: relative;
 				z-index: 1;
-				height: 31px;
+				height: 17px;
 				color: #fff;
 			}
 			
@@ -787,11 +785,11 @@
 			#categorys .dd-inner h3 {
 				position: absolute;
 				z-index: 2;
-				height: 31px;
+				height: 16px;
 				padding: 0 10px;
 				line-height: 31px;
 				font-family: "microsoft yahei";
-				font-size: 14px;
+				font-size: 10px;
 				font-weight: 400;
 			}
 			
@@ -1666,6 +1664,91 @@
 			}
 			/*最底部 结束*/
 		</style>
+		<script src="js/jquery-3.1.0.js"></script>
+		<script src="token.js"></script>
+		<script src="js/jd.js"></script>
+		<script src="js/vue.js"></script>
+		<script>
+			let userId = localStorage.getItem("userId");
+			let userName = localStorage.getItem("userName");
+			let token = localStorage.getItem("token");
+
+			$(function() {
+				let customer = new Vue({
+					el:"#shortcut",
+					data:{
+						name:"请登录",
+						addrs:[],
+						url:"我的订单/我的订单/DZSC_MyOrder.html"
+					},
+					methods:{
+						u:function () {
+							if (userId==null){
+								this.url="DZSC_Login.html";
+							}
+						}
+					}
+
+				});
+				let v = new Vue({
+					el:"#nav",
+					data:{
+						id:0,
+						pid:0,
+						goods:[],
+						child:[],
+					},
+					mounted:function () {
+						$.ajax({
+							url: "http://www.xiaozai.tech:2048/emall/categories",
+							dataType: "json",
+							type:"get",
+							beforeSend:function(request){
+								request.setRequestHeader("Authorization",token);
+							},
+							success:function(res) {
+								v.goods=res.data;
+								console.log(v.goods);
+							},
+
+						})
+						if (userId != null){
+							customer.name=userName;
+
+							$.ajax({
+								type:"get",
+								url:"http://www.xiaozai.tech:2048/emall/cart/"+userId,
+								beforeSend:function (request) {
+									request.setRequestHeader("Authorization",token);
+								},
+								success:function (result) {
+									cou.len = result.data.items.length;
+								}
+							});
+						};
+					}
+				});
+				let cou = new Vue({
+					el:"#settleup",
+					data:{
+						len:0,
+						cartUrl:"DZSC_ShoppingCart.html",
+					},
+					methods:{
+						setCartUrl:(function () {
+							if(userId == null){
+								this.cartUrl = "DZSC_Login.html";
+							}
+						})
+					}
+				});
+
+				$("h3").mouseenter(function () {
+					$(this).next().siblings("ul").hide();
+					$(this).next().toggle();
+				})
+			});
+		</script>
 
 	</head>
 
@@ -1801,13 +1884,13 @@
 				</ul>
 				<ul class="fr">
 					<li class="fore1" id="ttbar-login">
-						<a href="" class="link-login">你好，请登录</a>&nbsp;&nbsp;
+						<a href="DZSC_Login.html" class="link-login">你好，{{name}}</a>&nbsp;&nbsp;
 						<a href="DZSC_Register.html" class="link-regist style-red">免费注册</a>
 					</li>
 					<li class="spacer"></li>
 					<li class="fore2">
 						<div class="dt">
-							<a target="_blank" href="">我的订单</a>
+							<a target="_blank" @click="u()" :href="url">我的订单</a>
 						</div>
 					</li>
 					<li class="spacer"></li>
@@ -1823,7 +1906,7 @@
 									<a href=""><img src="img/top/no-img_mid_.jpg" width="60" height="60"></a>
 								</div>
 								<div class="u-name u-login">
-									<a href="" class="link-login">你好，请登录</a>
+									<a href="DZSC_Login.html" class="link-login">你好，请登录</a>
 								</div>
 								<div class="u-extra">
 									<a href="" target="_blank">优惠券<span id="num-ticket"></span></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -2183,14 +2266,14 @@
 				<ul id="shelper" class="hide" style="display: none;"></ul>
 				<div class="form">
 					<input type="text" autocomplete="off" id="key" class="text">
-					<button onclick="" class="button cw-icon"><i></i>搜索</button>
+					<button onclick="skip()" class="button cw-icon"><i></i>搜索</button>
 				</div>
 			</div>
 			<div id="settleup" class="dorpdown">
 				<div class="cw-icon">
 					<i class="ci-left"></i>
-					<i class="ci-right">&gt;</i><i class="ci-count" id="shopping-amount">0</i>
-					<a target="_blank" href="//cart.jd.com/cart.action">我的购物车</a>
+					<i class="ci-right">&gt;</i><i class="ci-count" id="shopping-amount">{{len}}</i>
+					<a target="_blank" :href="cartUrl"  v-on:click="setCartUrl">我的购物车</a>
 				</div>
 				<div class="dorpdown-layer">
 					<div class="spacer"></div>
@@ -2200,16 +2283,15 @@
 					</div>
 				</div>
 			</div>
-			<div id="hotwords">
-				<a href="" target="_blank" class="style-red">9.9团购</a>
-				<a href="" target="_blank">领免息券</a>
-				<a href="" target="_blank">3件7折</a>
-				<a href="" target="_blank">手机暑促</a>
-				<a href="" target="_blank">100元红包</a>
-				<a href="" target="_blank">运动裤</a>
-				<a href="" target="_blank">七夕礼物</a>
-				<a href="" target="_blank">0元试用</a>
-				<a href="" target="_blank">卫裤男</a>
+			<div onclick="serchs(event)" id="hotwords">
+				<a href="#" target="_blank">领免息券</a>
+				<a href="#" target="_blank">3件7折</a>
+				<a href="#" target="_blank">手机暑促</a>
+				<a href="#" target="_blank">100元红包</a>
+				<a href="#" target="_blank">运动裤</a>
+				<a href="#" target="_blank">七夕礼物</a>
+				<a href="#" target="_blank">0元试用</a>
+				<a href="#" target="_blank">卫裤男</a>
 			</div>
 			<span class="clr"></span>
 		</div>
@@ -2226,90 +2308,92 @@
 					</div>
 					<div class="dd">
 						<div class="dd-inner" id="categorys-dd-inner">
-
-							<div class="item fore1" data-index="1">
-								<h3><a target="_blank" href="">家用电器</a></h3>
+							<div class="item fore1" data-index="1" v-for="good in goods">
+								<h3><a target="_blank" v-bind:href="'DZSC_ListFir.html?text='+good.name">{{good.name}}</a></h3>
+								<div class="channels" v-for="go in goods.children">
+									<a href="" target="_blank" style="display: none">{{go.name}}<i>&gt;</i></a>
+								</div>
 								<i>&gt;</i>
 							</div>
-							<div class="item fore2" data-index="2">
-								<h3><a target="_blank" href="DZSC_ListFir.html">手机</a>
-									<a target="_blank" href="">数码</a>、
-									<a target="_blank" href="">京东通信</a>
-								</h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore3" data-index="3">
-								<h3><a target="_blank" href="">电脑、办公</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore4" data-index="4">
-								<h3><a target="_blank" href="">家居</a>、
-									<a target="_blank" href="">家具</a>、
-									<a target="_blank" href="">家装</a>、
-									<a target="_blank" href="">厨具</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore5" data-index="5">
-								<h3><a target="_blank" href="">男装</a>、
-									<a target="_blank" href="">女装</a>、
-									<a target="_blank" href="">童装</a>、
-									<a target="_blank" href="">内衣</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore6" data-index="6">
-								<h3><a target="_blank" href="">个护化妆</a>、
-									<a target="_blank" href="">清洁用品</a>、
-									<a target="_blank" href="">宠物</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore7" data-index="7">
-								<h3><a target="_blank" href="">鞋靴</a>、
-									<a target="_blank" href="">箱包</a>、
-									<a target="_blank" href="">珠宝</a>、
-									<a target="_blank" href="">奢侈品</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore8" data-index="8">
-								<h3><a target="_blank" href="">运动户外</a>、
-									<a target="_blank" href="">钟表</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore9" data-index="9">
-								<h3><a target="_blank" href="">汽车</a>、
-									<a target="_blank" href="">汽车用品</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore10" data-index="10">
-								<h3><a target="_blank" href="">母婴</a>、
-									<a target="_blank" href="">玩具乐器</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore11" data-index="11">
-								<h3><a target="_blank" href="">食品</a>、
-									<a target="_blank" href="">酒类</a>、
-									<a target="_blank" href="//fresh.jd.com">生鲜</a>、
-									<a target="_blank" href="//china.jd.com">特产</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore12" data-index="12">
-								<h3><a target="_blank" href="//health.jd.com">医药保健</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore13" data-index="13">
-								<h3><a target="_blank" href="">图书</a>、<a target="_blank" href="//mvd.jd.com/">音像</a>、<a target="_blank" href="//e.jd.com/ebook.html">电子书</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore14" data-index="14">
-								<h3><a target="_blank" href="//caipiao.jd.com/">彩票</a>、<a target="_blank" href="//trip.jd.com/">旅行</a>、<a target="_blank" href="//chongzhi.jd.com/">充值</a>、<a target="_blank" href="//piao.jd.com/">票务</a></h3>
-								<i>&gt;</i>
-							</div>
-							<div class="item fore15" data-index="15">
-								<h3><a target="_blank" href="//licai.jd.com/">理财</a>、<a target="_blank" href="//z.jd.com/">众筹</a>、<a target="_blank" href="//baitiao.jd.com">白条</a>、<a target="_blank" href="//bao.jd.com/">保险</a></h3>
-								<i>&gt;</i>
-							</div>
+<!--							<div class="item fore2" data-index="2">-->
+<!--								<h3><a target="_blank" href="DZSC_ListFir.html">手机</a>-->
+<!--									<a target="_blank" href="">数码</a>、-->
+<!--									<a target="_blank" href="">京东通信</a>-->
+<!--								</h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore3" data-index="3">-->
+<!--								<h3><a target="_blank" href="">电脑、办公</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore4" data-index="4">-->
+<!--								<h3><a target="_blank" href="">家居</a>、-->
+<!--									<a target="_blank" href="">家具</a>、-->
+<!--									<a target="_blank" href="">家装</a>、-->
+<!--									<a target="_blank" href="">厨具</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore5" data-index="5">-->
+<!--								<h3><a target="_blank" href="">男装</a>、-->
+<!--									<a target="_blank" href="">女装</a>、-->
+<!--									<a target="_blank" href="">童装</a>、-->
+<!--									<a target="_blank" href="">内衣</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore6" data-index="6">-->
+<!--								<h3><a target="_blank" href="">个护化妆</a>、-->
+<!--									<a target="_blank" href="">清洁用品</a>、-->
+<!--									<a target="_blank" href="">宠物</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore7" data-index="7">-->
+<!--								<h3><a target="_blank" href="">鞋靴</a>、-->
+<!--									<a target="_blank" href="">箱包</a>、-->
+<!--									<a target="_blank" href="">珠宝</a>、-->
+<!--									<a target="_blank" href="">奢侈品</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore8" data-index="8">-->
+<!--								<h3><a target="_blank" href="">运动户外</a>、-->
+<!--									<a target="_blank" href="">钟表</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore9" data-index="9">-->
+<!--								<h3><a target="_blank" href="">汽车</a>、-->
+<!--									<a target="_blank" href="">汽车用品</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore10" data-index="10">-->
+<!--								<h3><a target="_blank" href="">母婴</a>、-->
+<!--									<a target="_blank" href="">玩具乐器</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore11" data-index="11">-->
+<!--								<h3><a target="_blank" href="">食品</a>、-->
+<!--									<a target="_blank" href="">酒类</a>、-->
+<!--									<a target="_blank" href="//fresh.jd.com">生鲜</a>、-->
+<!--									<a target="_blank" href="//china.jd.com">特产</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore12" data-index="12">-->
+<!--								<h3><a target="_blank" href="//health.jd.com">医药保健</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore13" data-index="13">-->
+<!--								<h3><a target="_blank" href="">图书</a>、<a target="_blank" href="//mvd.jd.com/">音像</a>、<a target="_blank" href="//e.jd.com/ebook.html">电子书</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore14" data-index="14">-->
+<!--								<h3><a target="_blank" href="//caipiao.jd.com/">彩票</a>、<a target="_blank" href="//trip.jd.com/">旅行</a>、<a target="_blank" href="//chongzhi.jd.com/">充值</a>、<a target="_blank" href="//piao.jd.com/">票务</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
+<!--							<div class="item fore15" data-index="15">-->
+<!--								<h3><a target="_blank" href="//licai.jd.com/">理财</a>、<a target="_blank" href="//z.jd.com/">众筹</a>、<a target="_blank" href="//baitiao.jd.com">白条</a>、<a target="_blank" href="//bao.jd.com/">保险</a></h3>-->
+<!--								<i>&gt;</i>-->
+<!--							</div>-->
 						</div>
 						<div class="dorpdown-layer" id="category-dorpdown-layer">
-							<div class="item-sub" id="category-item-1" data-id="1">
+							<div class="item-sub" id="category-item-1" data-id="1" >
 								<div class="item-brands">
 									<div class="brands-inner">
 										<a href="" class="img-link" target="_blank"><img src="img/category/54d9ef34N7cc61f4c.jpg" width="83" height="35"></a>
@@ -2322,14 +2406,9 @@
 										<a href="" class="img-link" target="_blank"><img src="img/category/56a72d4fN4d1b42fe.jpg" width="83" height="35"></a>
 									</div>
 								</div>
-								<div class="item-channels">
-									<div class="channels">
-										<a href="" target="_blank">品牌日<i>&gt;</i></a>
-										<a href="" target="_blank">家电城<i>&gt;</i></a>
-										<a href="" target="_blank">智能生活馆<i>&gt;</i></a>
-										<a href="" target="_blank">京东净化馆<i>&gt;</i></a>
-										<a href="" target="_blank">京东帮服务店<i>&gt;</i></a>
-										<a href="" target="_blank">家电众筹馆<i>&gt;</i></a>
+								<div class="item-channels" >
+									<div class="channels" v-for="go in goods.children">
+										<a href="" target="_blank" >{{go.name}}<i>&gt;</i></a>
 									</div>
 								</div>
 								<div class="subitems">
@@ -4892,7 +4971,6 @@
 
 			})();
 		</script>
-		
 		<script type="text/javascript">
 			$(function() {
 				var $areaText = $(".area-text"),
@@ -4904,7 +4982,16 @@
 				});
 			});
 		</script>
-
+		<script>
+			function skip() {
+				window.location=encodeURI("DZSC_ListFir.html?text="+document.getElementById("key").value);
+			}
+			function serchs(e) {
+				let hot = e.target.innerHTML;
+				console.log(hot);
+				window.location=encodeURI("DZSC_ListFir.html?text="+hot.value);
+			}
+		</script>
 	</body>
 
 </html>

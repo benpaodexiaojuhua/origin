@@ -880,6 +880,9 @@
 		<script type="text/javascript">
 			
 			$(function(){
+				let userId = localStorage.getItem("userId");
+				let userName = localStorage.getItem("userName");
+				let token = localStorage.getItem("token");
 				$("#yhk-text").focus(function(){
 					
 					$("#yhkbtn").show();

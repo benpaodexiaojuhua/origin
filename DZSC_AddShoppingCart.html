@@ -1836,14 +1836,12 @@ img {
 	}
 	
 		</style>
-        <script src="token.js"></script>
         <script src="js/jquery-3.1.0.js"></script>
         <script src="js/vue.js"></script>
         <script>
             $(function () {
-				let userId = localStorage.getItem("userId");
-				let userName = localStorage.getItem("userName");
-				let token = localStorage.getItem("token");
+                let userId = localStorage.getItem("userId");
+               let token = localStorage.getItem("token");
                 let skuId = location.href.substring(location.href.indexOf('=')+1);
                 let product = new Vue({
                     el:"#w",
@@ -1866,17 +1864,21 @@ img {
                                         p.pro = item;
                                     }
                                 })
+								console.log(p.pro)
                             }
                         });
                         $.ajax({
                             type:"get",
-                            url:"http://www.xiaozai.tech:1024/emall/products/sku/"+skuId,
+                            url:"http://www.xiaozai.tech:2048/emall/skudetails/"+skuId,
                             beforeSend:function (request) {
                                 request.setRequestHeader("Authorization",token);
                             },
                             success:function (result) {
-                                 p.code = result.data.code;
-                                console.log(result.data)
+                                result.data.skus.forEach(function (sku) {
+                                    if(sku.id == skuId){
+                                        p.code = item.code;
+                                    }
+                                });
                             }
                         });
                         $.ajax({
@@ -1890,17 +1892,6 @@ img {
                                 console.log(result.data);
                             }
                         });
-                        $.ajax({
-                            type:"get",
-                            url:"http://www.xiaozai.tech:2048/emall/customer/addrs/"+userId,
-                            beforeSend:function (request) {
-                                request.setRequestHeader("Authorization",token);
-                            },
-                            success:function (result) {
-                                customer.addrs = result.data;
-                                console.log(customer.addrs)
-                            }
-                        });
                     }
                 })
                 let p = new Vue({
@@ -1908,13 +1899,13 @@ img {
                     data:{
                         pro:[],
                         code:"",
+						img:""
                     },
                 })
                 let customer = new Vue({
                     el:"#shortcut",
                     data:{
                         name:"请登录",
-						addrs:[]
                     },
                 })
             })

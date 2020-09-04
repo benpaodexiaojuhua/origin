@@ -1745,14 +1745,12 @@ img {
 
 
 </style>
-	  <script src="token.js"></script>
-	  <script src="js/jquery-3.1.0.js"></script>
+	  <script src="js/jquery-3.3.1.js"></script>
 	  <script src="js/vue.js"></script>
 	  <script>
           $(function () {
-			  let userId = localStorage.getItem("userId");
-			  let userName = localStorage.getItem("userName");
-			  let token = localStorage.getItem("token");
+              let userId = localStorage.getItem("userId");
+              let token = localStorage.getItem("token");
               let product = new Vue({
                   el:"#productCart",
                   data:{
@@ -1829,6 +1827,7 @@ img {
                               type:"PATCH",
                               url:"http://www.xiaozai.tech:2048/emall/cart/items",
                               data:JSON.stringify(pro),
+                              dataType:"json",
                               contentType:"application/json",
                               beforeSend:function (request) {
                                   request.setRequestHeader("Authorization",token);
@@ -1887,10 +1886,10 @@ img {
                           let len = this.pros.length;
                           this.pros.forEach(function (pro) {
                               if(pro.selected){
-                                  sum += pro.skuPrice*pro.skuCount;
+                                  sum += (pro.skuPrice/100).toFixed(2)*pro.skuCount;
                               }
                           })
-                          return sum;
+                          return sum.toFixed(2);
                       }),
                       calcNum:(function () {
                           let num = 0;
@@ -1968,7 +1967,7 @@ img {
 					<li class="dorpdown" id="ttbar-mycity">
                         <div class="dt cw-icon area-text-wrap">
                             <i class="ci-right"><s>◇</s></i> 送至：
-                            <span class="area-text" title="北京">1</span>
+                            <span class="area-text" title="北京">北京</span>
                         </div>
 
 						<div class="dd dorpdown-layer">
@@ -2535,7 +2534,7 @@ img {
 						<span class="promise"><i></i><a>购买礼品包装</a></span><br/>
 						<span class="promise" ><i style="background-position: 0 -23px;"></i><a class="jd-service" href="#none">购买增值保障</a></span>
 					</div>
-					<div class="cell p-price p-div3" ><strong>{{pro.skuPrice}}</strong></div>
+					<div class="cell p-price p-div3" ><strong>{{(pro.skuPrice/100).toFixed(2)}}</strong></div>
 					<div class="quantity-form">
                         <a class="decrement" v-on:click="numCut(index)">-</a>
                         <input v-model="pro.skuCount" type="text" autocomplete="off" class="p-quantity-itxt" />
@@ -2543,7 +2542,7 @@ img {
 
 					</div>
 
-					<div class="cell p-sum div4"><strong>{{pro.skuPrice*pro.skuCount}}</strong></div>
+					<div class="cell p-sum div4"><strong>{{(pro.skuPrice*pro.skuCount/100).toFixed(2)}}</strong></div>
 					<div class="cell p-ops div5">
 						<!--单品-->
 						<a v-on:click="del(index)">删除</a>

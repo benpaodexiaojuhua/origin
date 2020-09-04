@@ -33,7 +33,7 @@
 			}
 			
 			img {
-				border: 0;
+				border:0;
 				vertical-align: middle;
 			}
 			
@@ -3117,15 +3117,9 @@
 		<script src="js/jquery-3.1.0.js"></script>
 		<script src="js/vue.js"></script>
 		<script>
-
 			$(function () {
-				let userId = localStorage.getItem("userId");
-				let userName = localStorage.getItem("userName");
-				let token = localStorage.getItem("token");
-
-
-
-				alert(token);
+                let userId = localStorage.getItem("userId");
+                let token = localStorage.getItem("token");
 			    let skuId = location.href.substring(location.href.indexOf('=')+1);
                 let product = new Vue({
 					el:"#w",
@@ -3139,13 +3133,10 @@
 						count:0,
 						addrs:[],
 						names:"",
+						cartId:0,
                     },
                     methods:{
-					    setName:(function () {
-                            this.pro.images.forEach(function (image) {
-                                image.image = "http://123.57.7.108:81/".concat(image.image);
-                                image.largeImage = "http://123.57.7.108:81/".concat(image.largeImage);
-                            })
+					    setImg:(function () {
                             this.img = this.pro.images[0].largeImage
                         }),
                         setImage:(function (index) {
@@ -3164,19 +3155,18 @@
                                 $.ajax({
                                     type:"get",
                                     url:"http://www.xiaozai.tech:2048/emall/cart/"+userId,
-									dataType:"json",
-									contentType:"application/json;charset=utf-8",
                                     beforeSend:function (request) {
                                         request.setRequestHeader("Authorization",token);
                                     },
                                     success:function (result) {
+                                        product.cartId = result.data.id
                                         result.data.items.forEach(function (item) {
-											if(item.skuId == product.pro.id){
+											if(item.skuId == skuId){
 											    product.count += item.skuCount;
 											}
                                         })
-										product.count += product.num;
-                                        let insertPro = { "cartId":userId,"count":product.count,"skuId":product.pro.id};
+                                        product.count += product.num;
+                                        let insertPro = { "cartId":product.cartId,"count":product.count,"skuId":skuId};
                                         $.ajax({
                                             type:"PATCH",
                                             url:"http://www.xiaozai.tech:2048/emall/cart",
@@ -3186,6 +3176,7 @@
                                                 request.setRequestHeader("Authorization",token);
                                             },
                                             success:function (result) {
+                                                product.count = 0;
                                                 console.log(result);
                                             }
                                         });
@@ -3195,21 +3186,28 @@
 							}else{
 						        this.url = "DZSC_Login.html";
 							}
+							window.open(this.url);
                         }),
 						setId:(function (index) {
                              skuId = this.skus[index].id;
                              $.ajax({
-                                type:"get",
-                                url:"http://www.xiaozai.tech:1024/emall/products/sku/"+this.skus[index].id,
-								 dataType:"json",
-								 contentType:"application/json;charset=utf-8",
-                                beforeSend:function (request) {
-                                    request.setRequestHeader("Authorization",token);
-                                },
-                                success:function (result) {
-                                    product.pro = result.data;
-                                    product.setName()
-                                }
+                                 type:"get",
+                                 url:"http://www.xiaozai.tech:2048/emall/skudetails/"+skuId,
+                                 beforeSend:function (request) {
+                                     request.setRequestHeader("Authorization",token);
+                                 },
+                                 success:function (result) {
+                                     p.skus = result.data;
+                                     product.skus = result.data.skus;
+                                     p.skus.skus.forEach(function (sku) {
+                                         if(sku.id == skuId){
+                                             pr.pro = sku;
+                                             product.pro = sku;
+                                             product.setImg();
+                                         }
+                                     });
+                                     console.log(product.skus)
+                                 }
                             });
                         }),
 					},
@@ -3225,24 +3223,7 @@
 					mounted:function () {
                         $.ajax({
                             type:"get",
-                            url:"http://www.xiaozai.tech:1024/emall/products/sku/"+skuId,
-							dataType:"json",
-							contentType:"application/json;charset=utf-8",
-                            beforeSend:function (request) {
-                                request.setRequestHeader("Authorization",token);
-                            },
-                            success:function (result) {
-                            	console.log(token)
-                            	product.pro = result.data;
-                                console.log(result);
-                                product.setName();
-                            }
-                        });
-                        $.ajax({
-                            type:"get",
                             url:"http://www.xiaozai.tech:2048/emall/skudetails/"+skuId,
-							dataType:"json",
-							contentType:"application/json;charset=utf-8",
                             beforeSend:function (request) {
                                 request.setRequestHeader("Authorization",token);
                             },
@@ -3252,6 +3233,8 @@
                                 p.skus.skus.forEach(function (sku) {
 									if(sku.id == skuId){
 									    pr.pro = sku;
+                                        product.pro = sku;
+                                        product.setImg();
 									}
                                 });
                                 console.log(product.skus)
@@ -3261,8 +3244,6 @@
                             $.ajax({
                                 type:"get",
                                 url:"http://www.xiaozai.tech:2048/emall/customer/"+userId,
-								dataType:"json",
-								contentType:"application/json;charset=utf-8",
                                 beforeSend:function (request) {
                                     request.setRequestHeader("Authorization",token);
                                 },
@@ -3274,8 +3255,6 @@
                             $.ajax({
                                 type:"get",
                                 url:"http://www.xiaozai.tech:2048/emall/cart/"+userId,
-								dataType:"json",
-								contentType:"application/json;charset=utf-8",
                                 beforeSend:function (request) {
                                     request.setRequestHeader("Authorization",token);
                                 },
@@ -3286,8 +3265,6 @@
                             $.ajax({
                                 type:"get",
                                 url:"http://www.xiaozai.tech:2048/emall/customer/addrs/"+userId,
-								dataType:"json",
-								contentType:"application/json;charset=utf-8",
                                 beforeSend:function (request) {
                                     request.setRequestHeader("Authorization",token);
                                 },
@@ -3340,7 +3317,6 @@
                         })
 					}
 				})
-
             });
 		</script>
 	</head>
@@ -6424,7 +6400,7 @@
         		<div class="preview-wrap">
             		<div class="preview" id="preview" >
                         <div style="width: 452px;height: 452px;" id="spec-n1" class="jqzoom main-img"  clstag="shangpin|keycount|product|mainpic_1">
-                        	<img style="width: 452px;height: 452px;" :src="img" >
+                        	<img style="width: 452px;height: 452px;" :src="'http://123.57.7.108:81/'+img" >
                     	</div>
                     	
                     <div class="spec-list" clstag="shangpin|keycount|product|lunbotu_1" id="spec_animate">
@@ -6437,7 +6413,7 @@
                         <div style="position: relative;width: 380px;height: 58px;overflow: hidden;margin-left: 30px;" >
                         <div style="position: relative; width: 2000px; height: 58px; overflow: hidden;" id="spec-list" class="spec-items">
                             <ul style="position: absolute; width: 988px; height: 58px; top: 0px; left: 0px;" class="lh">
-								<li class="tel" id="1" v-for="(image,index) in pro.images"><img alt="华为 P9 全网通 3GB+32GB版 流光金 移动联通电信4G手机 双卡双待" :src="image.image" :data-url="image.largeImage" data-img="1" height="54" width="54" v-on:click="setImage(index)"></li>
+								<li class="tel" id="1" v-for="(image,index) in pro.images"><img alt="华为 P9 全网通 3GB+32GB版 流光金 移动联通电信4G手机 双卡双待" :src="'http://123.57.7.108:81/'+image.image" :data-url="image.largeImage" data-img="1" height="54" width="54" v-on:click="setImage(index)"></li>
 							</ul>
                         </div>
                         </div>
@@ -6482,7 +6458,7 @@
                         <div class="summary-price J-summary-price">
                             <div class="dt">京 东 价</div>
                             <div class="dd">
-                                <span class="p-price"><span>￥</span><span class="price J-p-2600210">{{pro.price}}</span></span>
+                                <span class="p-price"><span>￥</span><span class="price J-p-2600210">{{(pro.price/100).toFixed(2)}}</span></span>
                                 <a class="notice J-notify-sale" data-type="1" data-sku="2600210" href="#none" clstag="shangpin|keycount|product|jiangjia_1">降价通知</a>
                             </div>
                         </div>
@@ -6639,8 +6615,8 @@
                     <div id="choose-color" class="li choose-baitiao">
                         <div class="dt">选择</div>
 						<div v-for="(sku,index) in skus" v-on:click="setId(index)" :class="sku.id == pro.id ? 'item  selected':'item'">
-							<a href="javascript:;"   :title="sku.name" clstag="'shangpin|keycount|product|yanse-'+sku.name">
-								<img :src="'http://123.57.7.108:81/'+sku.images[1].image" alt="金色" height="40" width="40">
+							<a  :title="sku.name" clstag="'shangpin|keycount|product|yanse-'+sku.name">
+								<img :src="'http://123.57.7.108:81/'+sku.images[0].image" alt="金色" height="40" width="40">
 								<i>{{sku.name.substring(0,12)}}</i>
 							</a>
 						</div>
@@ -6670,7 +6646,7 @@
 							<div class="item" clstag="shangpin|keycount|product|baitiaofenqi_3_9987_653_655" data-snum="3">
 								<b></b>
 								<a href="#none">
-									<strong> ￥{{(pro.price/3).toFixed(2)}}×3期                    </strong>
+									<strong> ￥{{(pro.price/3/100).toFixed(2)}}×3期                    </strong>
 									<span style="display:none;">
                     						<em>惠</em> 含手续费
                     					</span>
@@ -6678,7 +6654,7 @@
 								<div class="baitiao-tips hide">
 									<ul>
 										<li>
-											含手续费：费率0.5%，￥{{(pro.price*0.005).toFixed(2)}}×3期
+											含手续费：费率0.5%，￥{{(pro.price*0.005/100).toFixed(2)}}×3期
 										</li>
 									</ul>
 								</div>
@@ -6686,42 +6662,42 @@
 							<div class="item" clstag="shangpin|keycount|product|baitiaofenqi_6_9987_653_655" data-snum="6">
 								<b></b>
 								<a href="#none">
-									<strong> ￥{{(pro.price/6).toFixed(2)}}×6期                    </strong>
+									<strong> ￥{{(pro.price/6/100).toFixed(2)}}×6期                    </strong>
 									<span style="display:none;">
                     						<em>惠</em> 含手续费
                     					</span>
 								</a>
 								<div class="baitiao-tips hide">
 									<ul>
-										<li>含手续费：费率0.5%，￥{{(pro.price*0.005).toFixed(2)}}×6期</li>
+										<li>含手续费：费率0.5%，￥{{(pro.price*0.005/100).toFixed(2)}}×6期</li>
 									</ul>
 								</div>
 							</div>
 							<div class="item" clstag="shangpin|keycount|product|baitiaofenqi_12_9987_653_655" data-snum="12">
 								<b></b>
 								<a href="#none">
-									<strong> ￥{{(pro.price/12).toFixed(2)}}×12期                    </strong>
+									<strong> ￥{{(pro.price/12/100).toFixed(2)}}×12期                    </strong>
 									<span style="display:none;">
                     						<em>惠</em> 含手续费
                     					</span>
 								</a>
 								<div class="baitiao-tips hide">
 									<ul>
-										<li>含手续费：费率0.5%，￥{{(pro.price*0.005).toFixed(2)}}×12期  </li>
+										<li>含手续费：费率0.5%，￥{{(pro.price*0.005/100).toFixed(2)}}×12期  </li>
 									</ul>
 								</div>
 							</div>
 							<div class="item" clstag="shangpin|keycount|product|baitiaofenqi_24_9987_653_655" data-snum="24">
 								<b></b>
 								<a href="#none">
-									<strong> ￥{{(pro.price/24).toFixed(2)}}×24期                    </strong>
+									<strong> ￥{{(pro.price/24/100).toFixed(2)}}×24期                    </strong>
 									<span style="display:none;">
                     						<em>惠</em> 含手续费
                     					</span>
 								</a>
 								<div class="baitiao-tips hide">
 									<ul>
-										<li>含手续费：费率0.5%，￥{{(pro.price*0.005).toFixed(2)}}×24期</li>
+										<li>含手续费：费率0.5%，￥{{(pro.price*0.005/100).toFixed(2)}}×24期</li>
 									</ul>
 								</div>
 							</div>
@@ -6751,7 +6727,7 @@
                         <a href="//eve.jd.com/redirect.action?wid=2600210&amp;btype=100&amp;pid=1&amp;cid=72&amp;r=0.08266748638877608" id="btn-heyue" class="btn-special1 btn-lg" style="display:none;" clstag="shangpin|keycount|product|选择号码和套餐_1">
                         	选择号码和套餐
                         </a>
-                        <a  v-on:click="addPro" :href="url"  id="InitCartUrl"  clstag="shangpin|keycount|product|加入购物车_1">
+                        <a  v-on:click="addPro"  return:true  id="InitCartUrl"  clstag="shangpin|keycount|product|加入购物车_1">
                         	
                         </a>
                         <a href="#none" id="btn-baitiao" class="btn-special2 btn-lg" style="display:none;">

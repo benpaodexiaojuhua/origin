@@ -2208,7 +2208,7 @@
         <div class="man_message">
             <h3 class="shrMes">收货人信息</h3>
             <div class="extra-r">
-                <a class="ftx-05" href="#none" style="position: relative;left:274px;">新增收货地址</a>
+                <a class="ftx-05" href="DZSC_AddAddrs.html" style="position: relative;left:274px;">新增收货地址</a>
                 <input id="del_consignee_type" type="hidden" value="0">
             </div>
         </div>
@@ -2313,8 +2313,8 @@
                                             </a>
                                         </div>
                                         <div class="p-price" style="position: relative;top:-11px;left: -1px;">
-                                            <strong class="jd-price">￥{{gm.skuPrice}}</strong>
-                                            <span class="p-num">x{{gm.selected}}</span>
+                                            <strong class="jd-price">￥{{gm.skuPrice/100}}</strong>
+                                            <span class="p-num">x{{gm.skuCount}}</span>
                                             <span class="p-state" id="pre-state" skuid="gm.skuId">有货</span>
                                         </div>
                                     </div>
@@ -2601,7 +2601,7 @@
                         money = (money + this.tGoodsMsg[i].skuPrice) - 0;
                     }
                     tMsg.totalMon=money;
-                    return money;
+                    return money/100;
                 }
             }
         });
@@ -2609,6 +2609,8 @@
             el:"#top",
             data:{
                 username:userName,
+                cartItemIds:[],
+                cartId:0,
             }
         });
         //获得购物的用户信息和地址
@@ -2644,17 +2646,36 @@
             },
             success: function (res) {
                 // console.log(res);
-                vue.goodsMsg = res.data.items;
-                tMsg.tGoodsMsg = res.data.items;
+                top.cartId = res.data.id
+                res.data.items.forEach(function (item) {
+                    if(item.selected == 1){
+                        vue.goodsMsg.push(item);
+                        tMsg.tGoodsMsg.push(item);
+                        top.cartItemIds.push(item.id);
+                    }
+                })
                 console.log(tMsg.tGoodsMsg)
             }
         })
         $(".tjbtn").click(function () {
             let Items = [];
             for (let i = 0; i < tMsg.tGoodsMsg.length; i++) {
-                let tempItem = {"count": tMsg.tGoodsMsg[i].selected, "skuId": tMsg.tGoodsMsg[i].skuId};
+                let tempItem = {"count": tMsg.tGoodsMsg[i].skuCount, "skuId": tMsg.tGoodsMsg[i].skuId};
                 Items.push(tempItem);
             }
+            let pro = {"cartId":top.cartId,"cartItemIds":top.cartItemIds};
+            $.ajax({
+                type:"DELETE",
+                url:"http://www.xiaozai.tech:2048/emall/cart/items",
+                data:JSON.stringify(pro),
+                contentType:"application/json",
+                beforeSend:function (request) {
+                    request.setRequestHeader("Authorization",token);
+                },
+                success:function (result) {
+                    console.log(result);
+                }
+            });
             // alert("发送ajax")
             $.ajax({
                 url: "http://www.xiaozai.tech:2048/emall/orders",
@@ -2681,7 +2702,6 @@
                 success: function (res) {
                     console.log(res);
                     localStorage.setItem("orderId",res.data);
-                    // alert(res.data);
                     location.assign("DZSC_AddOrder.html");
                 }
             })

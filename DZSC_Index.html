@@ -1669,12 +1669,11 @@
 		<script src="js/jd.js"></script>
 		<script src="js/vue.js"></script>
 		<script>
-			let userId = localStorage.getItem("userId");
-			let userName = localStorage.getItem("userName");
-			let token = localStorage.getItem("token");
-
 			$(function() {
-				let customer = new Vue({
+                let userId = localStorage.getItem("userId");
+                let userName = localStorage.getItem("userName");
+                let token = localStorage.getItem("token");
+                let customer = new Vue({
 					el:"#shortcut",
 					data:{
 						name:"请登录",
